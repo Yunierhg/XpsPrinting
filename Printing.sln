@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XpsPrinting", "XpsPrinting\XpsPrinting.csproj", "{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{15DACED5-5451-4135-8E0C-5A94E55A8356}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
