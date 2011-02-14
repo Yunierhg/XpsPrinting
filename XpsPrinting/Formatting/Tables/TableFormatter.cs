@@ -1,58 +1,31 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Markup;
 using System.Windows.Media;
+using XpsPrinting.Formatting.Utils;
 
-namespace XpsPrinting.Formatting
+namespace XpsPrinting.Formatting.Tables
 {
-    public class LogPrintDocumentCreator
+    public class TableFormatter
     {
-        private IList<PrintColumnInfo> _columnsInfo;
-        private DataView _data;
+        public FontProperties HeaderFont { get; private set; }
+        public FontProperties TableCellFont { get; private set; }
 
-        public LogPrintDocumentCreator(DataView data)
+        public TableFormatter()
         {
-            _data = data;
-            //if columns info is null than all column will have headers as columns' names
-            // and all colums will have equal width 
-            _columnsInfo = new List<PrintColumnInfo>(data.Table.Columns.Count);
-            for (int i = 0; i < data.Table.Columns.Count; i++)
-            {
-                _columnsInfo.Add(new PrintColumnInfo(data.Table.Columns[i].ColumnName));
-            }
+            HeaderFont = new FontProperties {FontWeight = FontWeights.Bold};
+            TableCellFont = new FontProperties();
         }
 
-        public LogPrintDocumentCreator(DataView data, IList<PrintColumnInfo> columnsInfo)
+        public Table FormatData(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, double width)
         {
-            _data = data;
-            _columnsInfo = columnsInfo;
-        }
-
-        public FlowDocument GetDocument(Size pageSize, Thickness margins)
-        {
-            //Load Document from the template file
-            FlowDocument targetDocument = LoadDocumentTemplate();
-            //find section named PlaceHolder there
-            var placeHolder = targetDocument.FindName("PlaceHolder") as Section;
-            if (placeHolder == null)
-                return null;
-            //Create Table as logs will be displayed as tabular data
             var contentTable = new Table();
-            placeHolder.Blocks.Add(contentTable);
-
-            //Get Fontsize settings from the placeholder
-            FontFamily fontFamily = placeHolder.FontFamily;
-            double fontSize = placeHolder.FontSize;
-            FontWeight fontWeight = placeHolder.FontWeight;
-            FontStyle fontStyle = placeHolder.FontStyle;
 
             //find the longes columns values from the data
-            Dictionary<PrintColumnInfo, string> columnsMaxValues = GetCellMaxLengthRow();
+            Dictionary<PrintColumnInfo, string> columnsMaxValues = GetCellMaxLengthRow(data, columnsInfo);
             //Compute columns width in UI Grid first and than use them in FlowDocument Table
             /* Unfortunately Table element from FlowDocument does not support auto column widthes
              * and Grid elemend could not be printed on multiple pages.
@@ -62,10 +35,9 @@ namespace XpsPrinting.Formatting
             //Creating fake grid to determing columns width
             var fakeGrid = new Grid();
             // creting real data width on print page
-            double width = pageSize.Width - (margins.Left + margins.Right) - (_columnsInfo.Count*contentTable.CellSpacing*2);
             fakeGrid.Width = width;
             //setting width of the UI Grid columns
-            foreach (PrintColumnInfo colInfo in _columnsInfo)
+            foreach (PrintColumnInfo colInfo in columnsInfo)
             {
                 var colDef = new ColumnDefinition();
                 colDef.Width = PrintLengthToGridLengthConverter.Convert(colInfo.ColumnWidth);
@@ -87,10 +59,7 @@ namespace XpsPrinting.Formatting
                 //add header
                 var tbHeader = new TextBlock();
                 tbHeader.Padding = new Thickness(2);
-                tbHeader.FontSize = fontSize;
-                tbHeader.FontFamily = fontFamily;
-                tbHeader.FontStyle = fontStyle;
-                tbHeader.FontWeight = FontWeights.Bold;
+                tbHeader.AssignFont(HeaderFont);
                 tbHeader.Text = columnInfo.Key.ColumnHeader;
                 fakeGrid.Children.Add(tbHeader);
                 Grid.SetColumn(tbHeader, counter);
@@ -98,10 +67,7 @@ namespace XpsPrinting.Formatting
                 //add data
                 var tbContent = new TextBlock();
                 tbContent.Padding = new Thickness(2);
-                tbContent.FontSize = fontSize;
-                tbContent.FontFamily = fontFamily;
-                tbContent.FontStyle = fontStyle;
-                tbContent.FontWeight = fontWeight;
+                tbContent.AssignFont(TableCellFont);
                 tbContent.Text = columnInfo.Value;
                 fakeGrid.Children.Add(tbContent);
                 Grid.SetColumn(tbContent, counter);
@@ -112,8 +78,8 @@ namespace XpsPrinting.Formatting
 
             // Fake rendering. It causes grid to calculate its children size 
             // without doing actual rendering
-            fakeGrid.Measure(new Size(width, pageSize.Height));
-            fakeGrid.Arrange(new Rect(new Size(width, pageSize.Height)));
+            fakeGrid.Measure(new Size(width, double.MaxValue));
+            fakeGrid.Arrange(new Rect(new Size(width, double.MaxValue)));
 
             //getting columns width
             var columnWidthes = new double[columnsMaxValues.Count];
@@ -122,7 +88,7 @@ namespace XpsPrinting.Formatting
                 columnWidthes[i] = fakeGrid.ColumnDefinitions[i].ActualWidth;
             }
 
-            int columnCount = _columnsInfo.Count;
+            int columnCount = columnsInfo.Count();
             // adding column and setting their width
             for (int i = 0; i < columnCount; i++)
             {
@@ -135,7 +101,7 @@ namespace XpsPrinting.Formatting
             contentTable.RowGroups.Add(new TableRowGroup());
             contentTable.RowGroups[0].Rows.Add(new TableRow());
             TableRow currentRow = contentTable.RowGroups[0].Rows[0];
-            foreach (PrintColumnInfo column in _columnsInfo)
+            foreach (PrintColumnInfo column in columnsInfo)
             {
                 currentRow.Cells.Add(new TableCell(new Paragraph(new Bold(new Run(column.ColumnHeader)))));
             }
@@ -150,11 +116,11 @@ namespace XpsPrinting.Formatting
             int colorCount = 0;
 
             // adding data to the table
-            foreach (DataRowView dataRowView in _data)
+            foreach (DataRowView dataRowView in data)
             {
                 currentRow = new TableRow();
-                currentRow.Background = ++colorCount%2 == 0 ? Brushes.LightGray : Brushes.White;
-                foreach (PrintColumnInfo columnInfo in _columnsInfo)
+                currentRow.Background = ++colorCount % 2 == 0 ? Brushes.LightGray : Brushes.White;
+                foreach (PrintColumnInfo columnInfo in columnsInfo)
                 {
                     string columnValue = dataRowView[columnInfo.ColumnName] != null ?
                                                                                         dataRowView[columnInfo.ColumnName].ToString() : string.Empty;
@@ -164,24 +130,14 @@ namespace XpsPrinting.Formatting
                 contentTable.RowGroups[0].Rows.Add(currentRow);
             }
 
-            return targetDocument;
+            return contentTable;
         }
 
-        public IList<PrintColumnInfo> PrintColumnsInfo
-        {
-            get { return _columnsInfo; }
-            set { _columnsInfo = value; }
-        }
-
-        /// <summary>
-        /// Finds the longest values from the log DataView and returns them
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<PrintColumnInfo, string> GetCellMaxLengthRow()
+        private static Dictionary<PrintColumnInfo, string> GetCellMaxLengthRow(DataView data, IEnumerable<PrintColumnInfo> columnsInfo)
         {
             var columnsMaxValues = new Dictionary<PrintColumnInfo, string>();
-            IEnumerable<DataRow> allRows = _data.Table.AsEnumerable();
-            foreach (PrintColumnInfo columnInfo in _columnsInfo)
+            IEnumerable<DataRow> allRows = data.Table.AsEnumerable();
+            foreach (PrintColumnInfo columnInfo in columnsInfo)
             {
                 //get the max value for particular column
                 IEnumerable<DataRow> maxLengthRow = from row in allRows
@@ -195,11 +151,6 @@ namespace XpsPrinting.Formatting
                 columnsMaxValues.Add(columnInfo, value);
             }
             return columnsMaxValues;
-        }
-
-        protected FlowDocument LoadDocumentTemplate()
-        {
-            return new ActivityLogDocumentTemplate();
         }
     }
 }

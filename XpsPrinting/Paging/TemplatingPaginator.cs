@@ -2,19 +2,20 @@ using System;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using XpsPrinting.Formatting;
 
 namespace XpsPrinting.Paging
 {
     public class TemplatingPaginator : DocumentPaginator
     {
-        private readonly IDynamicPaginator _main;
+        private readonly IDocumentFormatter _main;
         private readonly IBlankPageSource _blankPageSource;
         private int _pageCount;
         
         private DocumentPage _cachedPage;
         private int _cachedPageNumber = -1;
 
-        public TemplatingPaginator(IDynamicPaginator main, IBlankPageSource blankPageSource)
+        public TemplatingPaginator(IDocumentFormatter main, IBlankPageSource blankPageSource)
         {
             if (main == null) throw new ArgumentNullException("main");
             if (blankPageSource == null) throw new ArgumentNullException("blankPageSource");

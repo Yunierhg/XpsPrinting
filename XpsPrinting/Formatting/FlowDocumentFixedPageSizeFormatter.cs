@@ -3,24 +3,17 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace XpsPrinting.Paging
+namespace XpsPrinting.Formatting
 {
-    public class FlowDocumentFixedPageSizeDynamicPaginator : IDynamicPaginator
+    public abstract class FlowDocumentFixedPageSizeFormatter : IDocumentFormatter
     {
-        private readonly Func<Size, FlowDocument> _flowDocumentSource;
-
         private DocumentPaginator _docPaginator;
         private bool _pageSizeAdjusted;
         private Size _documentPageSize;
         private int _nextPageToRetrieveNumber;
 
-        public FlowDocumentFixedPageSizeDynamicPaginator(Func<Size, FlowDocument> flowDocumentSource)
-        {
-            if (flowDocumentSource == null) throw new ArgumentNullException("flowDocumentSource");
-
-            _flowDocumentSource = flowDocumentSource;
-        }
-
+        protected abstract FlowDocument GetDocument(Size pageSize);
+        
         public Visual GetNextPortion(Size availableSpace)
         {
             if (!_pageSizeAdjusted)
@@ -30,7 +23,7 @@ namespace XpsPrinting.Paging
             else
             {
                 if (_documentPageSize.Height > availableSpace.Height || _documentPageSize.Width > availableSpace.Width)
-                    throw new ArgumentOutOfRangeException("availableSpace", "FlowDocumentFixedPageSizeDynamicPaginator supports only page size of underlying FlowDocument or larger one.");
+                    throw new ArgumentOutOfRangeException("availableSpace", "FlowDocumentFixedPageSizeFormatter supports only page size of underlying FlowDocument or larger one.");
             }
 
             var page = _docPaginator.GetPage(_nextPageToRetrieveNumber++);
@@ -39,7 +32,7 @@ namespace XpsPrinting.Paging
 
         private void AdjustPageSize(Size pageSize)
         {
-            var flowDocument = _flowDocumentSource(pageSize);
+            var flowDocument = GetDocument(pageSize);
             _docPaginator = ((IDocumentPaginatorSource) flowDocument).DocumentPaginator;
             _documentPageSize = pageSize;
             _pageSizeAdjusted = true;

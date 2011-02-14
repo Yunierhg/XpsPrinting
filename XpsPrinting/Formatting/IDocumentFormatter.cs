@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace XpsPrinting.Paging
+namespace XpsPrinting.Formatting
 {
-    public interface IDynamicPaginator
+    public interface IDocumentFormatter
     {
         Visual GetNextPortion(Size availableSpace);
     }

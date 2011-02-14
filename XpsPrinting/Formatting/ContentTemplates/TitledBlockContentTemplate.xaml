@@ -1,0 +1,9 @@
+﻿<FlowDocument x:Class="XpsPrinting.Formatting.ContentTemplates.TitledBlockContentTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Paragraph FontSize="20pt" FontFamily="Arial">
+        <Run x:Name="runTitle" />
+    </Paragraph>
+    <Section x:Name="sectPlaceholder" FontFamily="Tahoma" FontSize="8pt" />
+</FlowDocument>

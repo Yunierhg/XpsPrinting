@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using XpsPrinting;
-using XpsPrinting.Formatting;
+using XpsPrinting.Formatting.Tables;
 
 namespace TestApp
 {
@@ -60,8 +60,7 @@ namespace TestApp
         private void Print(object parameter)
         {
             var printManager = new PrintManager();
-            var docCreator = new LogPrintDocumentCreator(_data, PrintColumns);
-            printManager.Print(docCreator, "ActivityLog");
+            printManager.Print(_data, PrintColumns, "ActivityLog");
         }
 
         private bool CanPrint(object parameter)
@@ -72,8 +71,7 @@ namespace TestApp
         public void Preview()
         {
             var printManager = new PrintManager();
-            var docCreator = new LogPrintDocumentCreator(_data, PrintColumns);
-            printManager.PrintPreview(docCreator, "ActivityLog");
+            printManager.PrintPreview(_data, PrintColumns, "ActivityLog");
         }
 
         private bool CanPreview(object parameter)

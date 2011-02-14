@@ -63,17 +63,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatting\ActivityLogDocumentTemplate.xaml.cs">
-      <DependentUpon>ActivityLogDocumentTemplate.xaml</DependentUpon>
+    <Compile Include="Formatting\ContentTemplates\TitledBlockContentTemplate.xaml.cs">
+      <DependentUpon>TitledBlockContentTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Formatting\LogPrintDocumentCreator.cs" />
-    <Compile Include="Formatting\PrintColumnInfo.cs" />
-    <Compile Include="Formatting\PrintLength.cs" />
-    <Compile Include="Formatting\PrintLengthToGridLengthConverter.cs" />
-    <Compile Include="Paging\FlowDocumentFixedPageSizeDynamicPaginator.cs" />
+    <Compile Include="Formatting\Utils\Extensions.cs" />
+    <Compile Include="Formatting\Utils\FontProperties.cs" />
+    <Compile Include="Formatting\SimpleTitledTableDocumentFormatter.cs" />
+    <Compile Include="Formatting\Tables\TableFormatter.cs" />
+    <Compile Include="Formatting\Tables\PrintColumnInfo.cs" />
+    <Compile Include="Formatting\Tables\PrintLength.cs" />
+    <Compile Include="Formatting\Tables\PrintLengthToGridLengthConverter.cs" />
+    <Compile Include="Formatting\FlowDocumentFixedPageSizeFormatter.cs" />
     <Compile Include="Paging\IBlankPage.cs" />
     <Compile Include="Paging\IBlankPageSource.cs" />
-    <Compile Include="Paging\IDynamicPaginator.cs" />
+    <Compile Include="Formatting\IDocumentFormatter.cs" />
     <Compile Include="Paging\PageTemplate.cs" />
     <Compile Include="Paging\SimplePageTemplate.xaml.cs">
       <DependentUpon>SimplePageTemplate.xaml</DependentUpon>
@@ -84,9 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Formatting\ActivityLogDocumentTemplate.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Formatting\ContentTemplates\TitledBlockContentTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Paging\SimplePageTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
