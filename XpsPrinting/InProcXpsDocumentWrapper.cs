@@ -9,7 +9,7 @@ namespace XpsPrinting
     {
         private readonly MemoryStream _memoryStream;
         private readonly Uri _documentUri;
-        private bool _disposed = false;
+        private bool _disposed;
 
         public InProcXpsDocumentWrapper()
         {

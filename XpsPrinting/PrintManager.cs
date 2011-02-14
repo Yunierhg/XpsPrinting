@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.IO.Packaging;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -27,18 +25,6 @@ namespace XpsPrinting
             }
         }
 
-        private static DocumentPaginator GetPaginator(Size pageSize, DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
-        {
-            Action<int, SimplePageTemplate> adjustPage = (pageNum, page) => page.PageNumber = String.Format("Page number: {0}", pageNum);
-
-            var blankPageSource = new TypedBlankPageSource<SimplePageTemplate>(pageSize, adjustPage);
-
-            var docFormatter = new SimpleTitledTableDocumentFormatter(data, columnsInfo, title);
-
-            return new TemplatingPaginator(docFormatter, blankPageSource);
-        }
-
-
         public void PrintPreview(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
         {
             //Page Size is Letter size 8.5 x 11 inches
@@ -52,6 +38,16 @@ namespace XpsPrinting
 
                 ShowXpsPreview(xpsWrapper.Document);
             }
+        }
+
+        private static DocumentPaginator GetPaginator(Size pageSize, DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
+        {
+            Action<int, SimplePageTemplate> adjustPage = (pageNum, page) => page.PageNumber = String.Format("Page number: {0}", pageNum);
+
+            var blankPageSource = new TypedBlankPageSource<SimplePageTemplate>(pageSize, adjustPage);
+            var docFormatter = new SimpleTitledTableDocumentFormatter(data, columnsInfo, title);
+
+            return new TemplatingPaginator(docFormatter, blankPageSource);
         }
 
         private static void ShowXpsPreview(XpsDocument xpsDocument)
