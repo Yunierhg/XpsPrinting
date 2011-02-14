@@ -17,18 +17,18 @@ namespace XpsPrinting
         public void Print(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
         {
             var printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
-            {
-                var pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
-                DocumentPaginator p = GetPaginator(pageSize, data, columnsInfo, title);
-                printDialog.PrintDocument(p, title);
-            }
+            if (printDialog.ShowDialog() != true) 
+                return;
+
+            var pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+            DocumentPaginator p = GetPaginator(pageSize, data, columnsInfo, title);
+            printDialog.PrintDocument(p, title);
         }
 
         public void PrintPreview(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
         {
             //Page Size is Letter size 8.5 x 11 inches
-            var pageSize = new Size(8.5 * 96, 11 * 96);
+            var pageSize = new Size(8.5*96, 11*96);
 
             DocumentPaginator documentPaginator = GetPaginator(pageSize, data, columnsInfo, title);
             using (var xpsWrapper = new InProcXpsDocumentWrapper())

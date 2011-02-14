@@ -12,7 +12,7 @@
         {
         }
 
-        //if no PrintLength specified column will be sized propertionaly to avalable space
+        //If no PrintLength specified column will be sized propertionaly to avalable space
         public PrintColumnInfo(string columnName, string columnHeader)
             : this(columnName, columnHeader, new PrintLength(1, PrintUnitType.Star))
         {

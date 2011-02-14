@@ -62,8 +62,10 @@ namespace XpsPrinting.Paging
 
         private static Visual TransformVisualToBox(Visual contentVisual, Rect dataContentBox)
         {
-            var visual = new ContainerVisual();
-            visual.Clip = new RectangleGeometry(new Rect(dataContentBox.Size));
+            var visual = new ContainerVisual
+                             {
+                                 Clip = new RectangleGeometry(new Rect(dataContentBox.Size))
+                             };
             visual.Children.Add(contentVisual);
             visual.Transform = new TranslateTransform(dataContentBox.Left, dataContentBox.Top);
             return visual;

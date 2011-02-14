@@ -25,15 +25,17 @@ namespace XpsPrinting.Formatting
             var tblFormatter = new TableFormatter();
             var table = tblFormatter.FormatData(_data, _columnsInfo, pageSize.Width);
 
-            var doc = new TitledBlockContentTemplate();
-            doc.Title = _title;
+            var doc = new TitledBlockContentTemplate
+                          {
+                              Title = _title, 
+                              PageHeight = pageSize.Height, 
+                              PageWidth = pageSize.Width, 
+                              ColumnWidth = pageSize.Width, 
+                              PagePadding = new Thickness(0)
+                          };
+
             doc.AppendBlock(table);
 
-            doc.PageHeight = pageSize.Height;
-            doc.PageWidth = pageSize.Width;
-            doc.ColumnWidth = pageSize.Width;
-            doc.PagePadding = new Thickness(0);
-            
             return doc;
         }
     }

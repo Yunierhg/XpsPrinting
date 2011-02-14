@@ -65,7 +65,7 @@ namespace TestApp
 
         private bool CanPrint(object parameter)
         {
-            return _data != null && _data.Count > 0;
+            return _data != null;
         }
 
         public void Preview()

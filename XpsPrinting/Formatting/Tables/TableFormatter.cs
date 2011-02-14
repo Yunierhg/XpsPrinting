@@ -11,14 +11,14 @@ namespace XpsPrinting.Formatting.Tables
 {
     public class TableFormatter
     {
-        public FontProperties HeaderFont { get; private set; }
-        public FontProperties TableCellFont { get; private set; }
-
         public TableFormatter()
         {
             HeaderFont = new FontProperties {FontWeight = FontWeights.Bold};
             TableCellFont = new FontProperties();
         }
+
+        public FontProperties HeaderFont { get; private set; }
+        public FontProperties TableCellFont { get; private set; }
 
         public Table FormatData(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, double width)
         {
@@ -54,7 +54,7 @@ namespace XpsPrinting.Formatting.Tables
 
             //adding content and header to the UI grid
             int counter = 0;
-            foreach (KeyValuePair<PrintColumnInfo, string> columnInfo in columnsMaxValues)
+            foreach (var columnInfo in columnsMaxValues)
             {
                 //add header
                 var tbHeader = new TextBlock();
@@ -119,7 +119,7 @@ namespace XpsPrinting.Formatting.Tables
             foreach (DataRowView dataRowView in data)
             {
                 currentRow = new TableRow();
-                currentRow.Background = ++colorCount % 2 == 0 ? Brushes.LightGray : Brushes.White;
+                currentRow.Background = ++colorCount%2 == 0 ? Brushes.LightGray : Brushes.White;
                 foreach (PrintColumnInfo columnInfo in columnsInfo)
                 {
                     string columnValue = dataRowView[columnInfo.ColumnName] != null ?
