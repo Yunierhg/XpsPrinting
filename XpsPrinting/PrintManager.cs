@@ -43,26 +43,14 @@ namespace XpsPrinting
         {
             //Page Size is Letter size 8.5 x 11 inches
             var pageSize = new Size(8.5 * 96, 11 * 96);
-            using (var memoryStream = new MemoryStream())
+
+            DocumentPaginator documentPaginator = GetPaginator(pageSize, data, columnsInfo, title);
+            using (var xpsWrapper = new InProcXpsDocumentWrapper())
             {
-                Package package = Package.Open(memoryStream, FileMode.Create, FileAccess.ReadWrite);
-                var documentUri = new Uri("pack://" + title + ".xps");
-                PackageStore.AddPackage(documentUri, package);
-                try
-                {
-                    DocumentPaginator documentPaginator = GetPaginator(pageSize, data, columnsInfo, title);
+                XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsWrapper.Document);
+                xpsWriter.Write(documentPaginator);
 
-                    var xpsDocument = new XpsDocument(package, CompressionOption.NotCompressed, documentUri.AbsoluteUri);
-                    XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDocument);
-                    xpsWriter.Write(documentPaginator);
-
-                    ShowXpsPreview(xpsDocument);
-                }
-                finally
-                {
-                    memoryStream.Close();
-                    PackageStore.RemovePackage(documentUri);
-                }
+                ShowXpsPreview(xpsWrapper.Document);
             }
         }
 

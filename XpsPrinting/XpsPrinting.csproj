@@ -74,6 +74,9 @@
     <Compile Include="Formatting\Tables\PrintLength.cs" />
     <Compile Include="Formatting\Tables\PrintLengthToGridLengthConverter.cs" />
     <Compile Include="Formatting\FlowDocumentFixedPageSizeFormatter.cs" />
+    <Compile Include="InProcXpsDocumentWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Paging\IBlankPage.cs" />
     <Compile Include="Paging\IBlankPageSource.cs" />
     <Compile Include="Formatting\IDocumentFormatter.cs" />
