@@ -1,4 +1,4 @@
-﻿<Paging:PageTemplate x:Class="XpsPrinting.Paging.SimplePageTemplate"
+﻿<Paging:BlankPageBase x:Class="XpsPrinting.Paging.SimpleBlankPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:Paging="clr-namespace:XpsPrinting.Paging"
@@ -18,4 +18,4 @@
 			<TextBlock HorizontalAlignment="Center" FontSize="20" Text="Some footer" />
 		</StackPanel>
 	</Grid>
-</Paging:PageTemplate>
+</Paging:BlankPageBase>

@@ -42,9 +42,12 @@ namespace XpsPrinting
 
         private static DocumentPaginator GetPaginator(Size pageSize, DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
         {
-            Action<int, SimplePageTemplate> adjustPage = (pageNum, page) => page.PageNumber = String.Format("Page number: {0}", pageNum);
-
-            var blankPageSource = new TypedBlankPageSource<SimplePageTemplate>(pageSize, adjustPage);
+            Func<int, SimpleBlankPage> pageFactoryMethod = pageNum => new SimpleBlankPage
+                                                                             {
+                                                                                 PageSize = pageSize, 
+                                                                                 PageNumber = String.Format("Page number: {0}", pageNum)
+                                                                             };
+            var blankPageSource = RelayedBlankPageSource.Create(pageFactoryMethod);
             var docFormatter = new SimpleTitledTableDocumentFormatter(data, columnsInfo, title);
 
             return new TemplatingPaginator(docFormatter, blankPageSource);

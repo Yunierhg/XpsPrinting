@@ -56,7 +56,7 @@ namespace XpsPrinting.Paging
             var transformedContentVisual = TransformVisualToBox(contentVisual, blankPage.DataContentBox);
             newPage.Children.Add(transformedContentVisual);
 
-            _cachedPage = new DocumentPage(newPage, blankPage.PageSize, blankPage.BleedBox, blankPage.ContentBox);
+            _cachedPage = new DocumentPage(newPage, blankPage.PageSize, Rect.Empty, blankPage.ContentBox);
             _cachedPageNumber = retrievingPageNumber;
         }
 

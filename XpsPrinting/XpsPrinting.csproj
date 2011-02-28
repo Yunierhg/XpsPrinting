@@ -80,12 +80,12 @@
     <Compile Include="Paging\IBlankPage.cs" />
     <Compile Include="Paging\IBlankPageSource.cs" />
     <Compile Include="Formatting\IDocumentFormatter.cs" />
-    <Compile Include="Paging\PageTemplate.cs" />
-    <Compile Include="Paging\SimplePageTemplate.xaml.cs">
-      <DependentUpon>SimplePageTemplate.xaml</DependentUpon>
+    <Compile Include="Paging\BlankPageBase.cs" />
+    <Compile Include="Paging\SimpleBlankPage.xaml.cs">
+      <DependentUpon>SimpleBlankPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Paging\TemplatingPaginator.cs" />
-    <Compile Include="Paging\TypedBlankPageSource.cs" />
+    <Compile Include="Paging\RelayedBlankPageSource.cs" />
     <Compile Include="PrintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -94,7 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Paging\SimplePageTemplate.xaml">
+    <Page Include="Paging\SimpleBlankPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

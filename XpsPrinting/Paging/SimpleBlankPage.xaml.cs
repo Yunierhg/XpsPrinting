@@ -2,9 +2,9 @@
 
 namespace XpsPrinting.Paging
 {
-    public partial class SimplePageTemplate : PageTemplate
+    public partial class SimpleBlankPage : BlankPageBase
     {
-        public SimplePageTemplate()
+        public SimpleBlankPage()
         {
             InitializeComponent();
         }
