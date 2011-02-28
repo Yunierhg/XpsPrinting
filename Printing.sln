@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XpsPrinting", "XpsPrinting\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{15DACED5-5451-4135-8E0C-5A94E55A8356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XpsPrinting.Tests", "XpsPrinting.Tests\XpsPrinting.Tests.csproj", "{9C85313F-689B-4AAD-BCA7-FAA3C0D087FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DACED5-5451-4135-8E0C-5A94E55A8356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C85313F-689B-4AAD-BCA7-FAA3C0D087FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C85313F-689B-4AAD-BCA7-FAA3C0D087FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C85313F-689B-4AAD-BCA7-FAA3C0D087FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C85313F-689B-4AAD-BCA7-FAA3C0D087FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

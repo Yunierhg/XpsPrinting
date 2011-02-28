@@ -63,6 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documents\IDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\IPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Formatting\ContentTemplates\TitledBlockContentTemplate.xaml.cs">
       <DependentUpon>TitledBlockContentTemplate.xaml</DependentUpon>
     </Compile>
@@ -77,6 +83,7 @@
     <Compile Include="InProcXpsDocumentWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InvalidReturnValue.cs" />
     <Compile Include="Paging\IBlankPage.cs" />
     <Compile Include="Paging\IBlankPageSource.cs" />
     <Compile Include="Formatting\IDocumentFormatter.cs" />
@@ -88,6 +95,7 @@
     <Compile Include="Paging\RelayedBlankPageSource.cs" />
     <Compile Include="PrintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XpsPrintingDocumentPaginator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Formatting\ContentTemplates\TitledBlockContentTemplate.xaml">
