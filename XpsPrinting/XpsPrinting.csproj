@@ -83,7 +83,7 @@
     <Compile Include="InProcXpsDocumentWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InvalidReturnValue.cs" />
+    <Compile Include="InvalidDocumentPageException.cs" />
     <Compile Include="Paging\IBlankPage.cs" />
     <Compile Include="Paging\IBlankPageSource.cs" />
     <Compile Include="Formatting\IDocumentFormatter.cs" />

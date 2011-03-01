@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace XpsPrinting
 {
     [Serializable]
-    public class InvalidReturnValue : Exception
+    public class InvalidDocumentPageException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -13,19 +13,19 @@ namespace XpsPrinting
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public InvalidReturnValue()
+        public InvalidDocumentPageException()
         {
         }
 
-        public InvalidReturnValue(string message) : base(message)
+        public InvalidDocumentPageException(string message) : base(message)
         {
         }
 
-        public InvalidReturnValue(string message, Exception inner) : base(message, inner)
+        public InvalidDocumentPageException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected InvalidReturnValue(
+        protected InvalidDocumentPageException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

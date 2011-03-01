@@ -1,21 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using NUnit.Framework;
 using XpsPrinting.Documents;
-using System.Linq;
 
 namespace XpsPrinting.Tests
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class XpsPrintingAdapterTests
     {
         private DocumentStub _documentStub;
 
-        private class DocumentStub : IDocument
+        private class DocumentStub : IDocument, IEnumerable<IPage>
         {
             private readonly IEnumerable<IPage> _pages;
 
@@ -37,11 +38,16 @@ namespace XpsPrinting.Tests
                 EnumeratorCreationCallCount++;
                 return GetEnumerator();
             }
+
+            public IEnumerable<IPage> GetPages()
+            {
+                return this;
+            }
         }
 
         private class PageStub : IPage
         {
-            public int Id { get; set; }
+            public int Id { get; private set; }
 
             public PageStub(int id)
             {
@@ -50,17 +56,17 @@ namespace XpsPrinting.Tests
 
             public Size PageSize
             {
-                get { throw new NotImplementedException(); }
+                get { throw new NotSupportedException(); }
             }
 
             public Rect ContentBox
             {
-                get { throw new NotImplementedException(); }
+                get { throw new NotSupportedException(); }
             }
 
             public Visual Visual
             {
-                get { throw new NotImplementedException(); }
+                get { throw new NotSupportedException(); }
             }
         }
 
@@ -75,14 +81,14 @@ namespace XpsPrinting.Tests
 
             protected override DocumentPage CreateDocumentPage(IPage page)
             {
-                Callings.Add(((PageStub)page).Id);
+                Callings.Add(((PageStub) page).Id);
                 return null;
             }
         }
 
         private TestableXpsPrintingDocumentPaginator GetPaginator(params int[] pageIds)
         {
-            var pages = pageIds.Select(id => (IPage)new PageStub(id));
+            var pages = pageIds.Select(id => (IPage) new PageStub(id));
             _documentStub = new DocumentStub(pages);
             return new TestableXpsPrintingDocumentPaginator(_documentStub);
         }
@@ -133,7 +139,7 @@ namespace XpsPrinting.Tests
         {
             var sut = GetPaginator(10, 20, 30);
             sut.GetPage(1);
-            CollectionAssert.AreEqual(new[] { 20 }, sut.Callings);
+            CollectionAssert.AreEqual(new[] {20}, sut.Callings);
         }
 
         [Test]
@@ -143,7 +149,7 @@ namespace XpsPrinting.Tests
             sut.GetPage(1);
             sut.GetPage(0);
             Assert.AreEqual(2, _documentStub.EnumeratorCreationCallCount);
-            CollectionAssert.AreEqual(new[]{20, 10}, sut.Callings);
+            CollectionAssert.AreEqual(new[] {20, 10}, sut.Callings);
         }
 
         [Test]
@@ -153,7 +159,7 @@ namespace XpsPrinting.Tests
             sut.GetPage(0);
             sut.GetPage(1);
             Assert.AreEqual(1, _documentStub.EnumeratorCreationCallCount);
-            CollectionAssert.AreEqual(new[] { 10, 20 }, sut.Callings);
+            CollectionAssert.AreEqual(new[] {10, 20}, sut.Callings);
         }
 
         [Test]
@@ -164,5 +170,23 @@ namespace XpsPrinting.Tests
             Assert.IsTrue(sut.IsPageCountValid);
             Assert.AreEqual(3, sut.PageCount);
         }
+
+        [Test]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void Ctor_NullAsDocument_Throws()
+        {
+            new XpsPrintingDocumentPaginator(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidDocumentPageException))]
+        public void GetPage_SomePageReturningNullInDocument_Throws()
+        {
+            var pages = new IPage[] {new PageStub(0), new PageStub(1), null, new PageStub(3)};
+            var doc = new DocumentStub(pages);
+            var sut = new XpsPrintingDocumentPaginator(doc);
+            sut.GetPage(2);
+        }
     }
+    // ReSharper restore InconsistentNaming
 }

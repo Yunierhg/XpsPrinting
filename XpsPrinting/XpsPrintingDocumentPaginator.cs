@@ -8,7 +8,7 @@ namespace XpsPrinting
 {
     public class XpsPrintingDocumentPaginator : DocumentPaginator
     {
-        private readonly IDocument _document;
+        private readonly IEnumerable<IPage> _pages;
 
         private IEnumerator<IPage> _currentEnumerator;
         private int _currentPageNumber = -1;
@@ -19,10 +19,10 @@ namespace XpsPrinting
         {
             if (document == null) throw new ArgumentNullException("document");
 
-            _document = document;
+            _pages = document.GetPages();
 
             // if document is empty - IsPageCountValid and PageCount should become 0 and true instantly. So fetch first page eagerly
-            _currentEnumerator = _document.GetEnumerator();
+            _currentEnumerator = _pages.GetEnumerator();
             GetNextPage();
         }
 
@@ -40,7 +40,7 @@ namespace XpsPrinting
             }
 
             var page = _currentEnumerator.Current;
-            if (page == null) throw new InvalidReturnValue("IDocument's enumerator returned null as Current");
+            if (page == null) throw new InvalidDocumentPageException("IDocument's enumerator returned null as Current");
 
             // DocumentPaginator clients inside .NET Framework are implicitly assuming that while IsPageCountValid returns false
             // and GetPage(x) was already called successfully - GetPage(x+1) should return real page, not DocumentPage.Missing.
@@ -82,7 +82,7 @@ namespace XpsPrinting
             if (_currentEnumerator == null || _currentPageNumber > pageNumber)
             {
                 if (_currentEnumerator != null) _currentEnumerator.Dispose();
-                _currentEnumerator = _document.GetEnumerator();
+                _currentEnumerator = _pages.GetEnumerator();
                 _currentPageNumber = -1;
             }
         }
