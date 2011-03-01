@@ -7,7 +7,7 @@ using XpsPrinting.Formatting.Tables;
 
 namespace XpsPrinting.Formatting
 {
-    public class SimpleTitledTableDataFormatter : DocumentPaginatorDataFormatter
+    public class SimpleTitledTableDataFormatter : DocumentPaginatorDataFormatterBase
     {
         private readonly DataView _data;
         private readonly IEnumerable<PrintColumnInfo> _columnsInfo;

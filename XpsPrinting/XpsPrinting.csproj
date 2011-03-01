@@ -80,7 +80,7 @@
     <Compile Include="Formatting\Tables\PrintColumnInfo.cs" />
     <Compile Include="Formatting\Tables\PrintLength.cs" />
     <Compile Include="Formatting\Tables\PrintLengthToGridLengthConverter.cs" />
-    <Compile Include="Formatting\DocumentPaginatorDataFormatter.cs" />
+    <Compile Include="Formatting\DocumentPaginatorDataFormatterBase.cs" />
     <Compile Include="InProcXpsDocumentWrapper.cs">
       <SubType>Code</SubType>
     </Compile>

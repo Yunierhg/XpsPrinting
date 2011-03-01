@@ -19,7 +19,12 @@ namespace XpsPrinting.Paging
 
         public virtual Rect ContentBox
         {
-            get { return new Rect(Margin.Left + ActualWidth, Margin.Top + ActualHeight, ActualWidth, ActualHeight); }
+            get
+            {
+                var width = PageSize.Width - Margin.Left - Margin.Right;
+                var heigth = PageSize.Height - Margin.Top - Margin.Bottom;
+                return new Rect(Margin.Left, Margin.Top, width, heigth);
+            }
         }
 
         public virtual Size PageSize

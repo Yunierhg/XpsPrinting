@@ -15,7 +15,7 @@ namespace XpsPrinting.Formatting
     /// 
     /// So, when first chunk of formatted data is requested, we treat availableSpace as that fixed page size.
     /// </remarks>
-    public abstract class DocumentPaginatorDataFormatter : IDataFormatter
+    public abstract class DocumentPaginatorDataFormatterBase : IDataFormatter
     {
         private DocumentPaginator _docPaginator;
         private int _nextPageToRetrieveNumber;

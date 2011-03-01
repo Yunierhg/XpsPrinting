@@ -12,7 +12,7 @@ namespace XpsPrinting.Tests
     [TestFixture]
     public class DocumentPaginatorSourceDataFormatterTests
     {
-        private class Testable : DocumentPaginatorDataFormatter
+        private class Testable : DocumentPaginatorDataFormatterBase
         {
             private DocumentPaginator _returnResult;
 
