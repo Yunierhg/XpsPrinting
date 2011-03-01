@@ -1,6 +1,6 @@
 ﻿using System.Windows.Documents;
 
-namespace XpsPrinting.Formatting.ContentTemplates
+namespace TestApp._3
 {
     public partial class TitledBlockContentTemplate : FlowDocument
     {

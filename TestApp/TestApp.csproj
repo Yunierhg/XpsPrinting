@@ -70,6 +70,9 @@
     <Compile Include="_1\SimpleTextPrinting.xaml.cs">
       <DependentUpon>SimpleTextPrinting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_2\SimpleBlankPage.xaml.cs">
+      <DependentUpon>SimpleBlankPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_3\Database.cs" />
     <Compile Include="_3\LogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -88,6 +91,10 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="_3\SimpleTableDataPrinting.xaml.cs">
       <DependentUpon>SimpleTableDataPrinting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_3\SimpleTitledTableDataFormatter.cs" />
+    <Compile Include="_3\TitledBlockContentTemplate.xaml.cs">
+      <DependentUpon>TitledBlockContentTemplate.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,7 +115,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="_2\SimpleBlankPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="_3\SimpleTableDataPrinting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_3\TitledBlockContentTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -118,9 +133,6 @@
       <Project>{9D992FDB-733B-4C15-AC12-53E6F0A00CDD}</Project>
       <Name>XpsPrinting</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

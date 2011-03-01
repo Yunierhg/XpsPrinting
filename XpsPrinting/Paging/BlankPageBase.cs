@@ -12,6 +12,12 @@ namespace XpsPrinting.Paging
     /// </summary>
     public class BlankPageBase : UserControl, IBlankPage
     {
+        public BlankPageBase()
+        {
+            const double defaultMargin = 0.5; // inches
+            Margin = new Thickness(defaultMargin * 96);
+        }
+
         public virtual Rect DataContentBox
         {
             get { return ContentBox; }

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using XpsPrinting.Paging;
 
-namespace XpsPrinting.Paging
+namespace TestApp._2
 {
     public partial class SimpleBlankPage : BlankPageBase
     {

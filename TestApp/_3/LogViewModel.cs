@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Windows;
 using XpsPrinting;
+using XpsPrinting.Documents;
+using XpsPrinting.Formatting;
 using XpsPrinting.Formatting.Tables;
+using XpsPrinting.Paging;
+using SimpleBlankPage = TestApp._2.SimpleBlankPage;
 
 namespace TestApp._3
 {
@@ -60,7 +66,8 @@ namespace TestApp._3
         private void Print(object parameter)
         {
             var printManager = new PrintManager();
-            printManager.Print(_data, PrintColumns, "ActivityLog");
+            var doc = GetDocument(_data, PrintColumns, "ActivityLog");
+            printManager.Print(doc, "ActivityLog printing job");
         }
 
         private bool CanPrint(object parameter)
@@ -71,12 +78,26 @@ namespace TestApp._3
         public void Preview()
         {
             var printManager = new PrintManager();
-            printManager.PrintPreview(_data, PrintColumns, "ActivityLog");
+            var doc = GetDocument(_data, PrintColumns, "ActivityLog");
+            printManager.PrintPreview(doc);
         }
 
         private bool CanPreview(object parameter)
         {
             return CanPrint(parameter);
+        }
+
+        private static IDocument GetDocument(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
+        {
+            var pageSize = new Size(8.5 * 96, 11 * 96);
+            Func<int, IBlankPage> pageFactoryMethod = pageNum => new BlankPageBase
+            {
+                PageSize = pageSize,
+            };
+            var blankPageSource = new RelayedBlankPageSource(pageFactoryMethod);
+            var docFormatter = new SimpleTitledTableDataFormatter(data, columnsInfo, title);
+
+            return new SimpleDocument(blankPageSource, docFormatter);
         }
     }
 }

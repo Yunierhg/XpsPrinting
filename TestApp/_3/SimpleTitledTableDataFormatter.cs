@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Documents;
-using XpsPrinting.Formatting.ContentTemplates;
+using XpsPrinting.Formatting;
 using XpsPrinting.Formatting.Tables;
 
-namespace XpsPrinting.Formatting
+namespace TestApp._3
 {
     public class SimpleTitledTableDataFormatter : DocumentPaginatorDataFormatterBase
     {
