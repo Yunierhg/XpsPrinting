@@ -1,0 +1,23 @@
+﻿<Window x:Class="TestApp._2.HeaderFooterPrinting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HeaderFooterPrinting" SizeToContent="WidthAndHeight">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<TextBlock>
+			How many pages you want to print?
+		</TextBlock>
+		<StackPanel Orientation="Horizontal" Grid.Row="1">
+			<Button Click="DecreaseClick" Content="&lt;&lt;" />
+            <TextBox IsReadOnly="True" Name="txtCount" />
+            <Button Click="IncreaseClick" Content="&gt;&gt;" />
+		</StackPanel>
+        <Button Grid.Row="2" Click="GoClick">OK</Button>
+	</Grid>
+</Window>

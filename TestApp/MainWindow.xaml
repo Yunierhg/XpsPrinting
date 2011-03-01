@@ -1,7 +1,9 @@
 ﻿<Window x:Class="TestApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:_1="clr-namespace:TestApp._1" xmlns:_3="clr-namespace:TestApp._3" 
+        xmlns:_1="clr-namespace:TestApp._1" 
+        xmlns:_2="clr-namespace:TestApp._2"
+        xmlns:_3="clr-namespace:TestApp._3" 
         Title="MainWindow"
         SizeToContent="WidthAndHeight"
         >
@@ -19,7 +21,7 @@
 		<Button Command="{Binding RunDemo}" CommandParameter="{x:Type _1:SimpleTextPrinting}">
 			1. Simple text printing
 		</Button>
-		<Button Command="{Binding RunDemo}">
+		<Button Command="{Binding RunDemo}" CommandParameter="{x:Type _2:HeaderFooterPrinting}">
 			2. Adding header with document name and footer with page number
 		</Button>
 		<Button Command="{Binding RunDemo}" CommandParameter="{x:Type _3:SimpleTableDataPrinting}">
