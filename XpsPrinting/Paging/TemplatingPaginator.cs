@@ -8,14 +8,14 @@ namespace XpsPrinting.Paging
 {
     public class TemplatingPaginator : DocumentPaginator
     {
-        private readonly IDocumentFormatter _main;
+        private readonly IDataFormatter _main;
         private readonly IBlankPageSource _blankPageSource;
         private int _pageCount;
         
         private DocumentPage _cachedPage;
         private int _cachedPageNumber = -1;
 
-        public TemplatingPaginator(IDocumentFormatter main, IBlankPageSource blankPageSource)
+        public TemplatingPaginator(IDataFormatter main, IBlankPageSource blankPageSource)
         {
             if (main == null) throw new ArgumentNullException("main");
             if (blankPageSource == null) throw new ArgumentNullException("blankPageSource");

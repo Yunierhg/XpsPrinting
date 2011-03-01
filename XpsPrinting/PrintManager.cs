@@ -48,7 +48,7 @@ namespace XpsPrinting
                                                                                  PageNumber = String.Format("Page number: {0}", pageNum)
                                                                              };
             var blankPageSource = RelayedBlankPageSource.Create(pageFactoryMethod);
-            var docFormatter = new SimpleTitledTableDocumentFormatter(data, columnsInfo, title);
+            var docFormatter = new SimpleTitledTableDataFormatter(data, columnsInfo, title);
 
             return new TemplatingPaginator(docFormatter, blankPageSource);
         }
