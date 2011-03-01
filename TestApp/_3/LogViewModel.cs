@@ -3,7 +3,7 @@ using System.Data;
 using XpsPrinting;
 using XpsPrinting.Formatting.Tables;
 
-namespace TestApp
+namespace TestApp._3
 {
     internal class LogViewModel
     {

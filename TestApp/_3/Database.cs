@@ -3,7 +3,7 @@ using System.Data;
 using System.Threading;
 using System.Windows.Threading;
 
-namespace TestApp
+namespace TestApp._3
 {
     internal static class Database
     {

@@ -1,0 +1,47 @@
+﻿<Window x:Class="TestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:_1="clr-namespace:TestApp._1" xmlns:_3="clr-namespace:TestApp._3" 
+        Title="MainWindow"
+        SizeToContent="WidthAndHeight"
+        >
+
+	<Window.Resources>
+		<Style TargetType="{x:Type Button}">
+			<Setter Property="Margin" Value="15,5" />
+			<Setter Property="Padding" Value="10,5" />
+			<Setter Property="HorizontalContentAlignment" Value="Left" />
+			<Setter Property="Command" Value="{Binding RunDemo}" />
+		</Style>
+	</Window.Resources>
+
+	<StackPanel Margin="30">
+		<Button Command="{Binding RunDemo}" CommandParameter="{x:Type _1:SimpleTextPrinting}">
+			1. Simple text printing
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			2. Adding header with document name and footer with page number
+		</Button>
+		<Button Command="{Binding RunDemo}" CommandParameter="{x:Type _3:SimpleTableDataPrinting}">
+			3. Simple table data printing
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			4. Setting mirrored page margins
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			5. Multi-part document with different page settings for each part
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			6. Adding simple chart formatters
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			7. Adding watermarks to the page
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			8. Custom formatting of table cells
+		</Button>
+		<Button Command="{Binding RunDemo}">
+			x. Putting everything together
+		</Button>
+	</StackPanel>
+</Window>

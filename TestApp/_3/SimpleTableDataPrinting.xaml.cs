@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using System.Windows;
 
-namespace TestApp
+namespace TestApp._3
 {
-    public partial class Window1 : Window
+    public partial class SimpleTableDataPrinting : Window
     {
-        public Window1()
+        public SimpleTableDataPrinting()
         {
             InitializeComponent();
             DataContext = new LogViewModel(new DataView(Database.GetLogData()));

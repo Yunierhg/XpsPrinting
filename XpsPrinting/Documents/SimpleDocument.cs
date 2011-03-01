@@ -10,6 +10,11 @@ namespace XpsPrinting.Documents
         private readonly IBlankPageSource _blankPageSource;
         private readonly IDataFormatter _dataFormatter;
 
+        public SimpleDocument(IDataFormatter dataFormatter)
+            : this(new RelayedBlankPageSource(_ => new BlankPageBase()), dataFormatter)
+        {
+        }
+
         public SimpleDocument(IBlankPageSource blankPageSource, IDataFormatter dataFormatter)
         {
             if (blankPageSource == null) throw new ArgumentNullException("blankPageSource");
