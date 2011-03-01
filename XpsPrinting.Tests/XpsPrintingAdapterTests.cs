@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using NUnit.Framework;
 using XpsPrinting.Documents;
+using XpsPrinting.Paging;
 
 namespace XpsPrinting.Tests
 {

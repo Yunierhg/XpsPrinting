@@ -66,7 +66,7 @@
     <Compile Include="Documents\IDocument.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Documents\IPage.cs">
+    <Compile Include="Paging\IPage.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Documents\SimpleDocument.cs" />
@@ -89,10 +89,10 @@
     <Compile Include="Paging\IBlankPageSource.cs" />
     <Compile Include="Formatting\IDataFormatter.cs" />
     <Compile Include="Paging\BlankPageBase.cs" />
+    <Compile Include="Paging\Page.cs" />
     <Compile Include="Paging\SimpleBlankPage.xaml.cs">
       <DependentUpon>SimpleBlankPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Paging\TemplatingPaginator.cs" />
     <Compile Include="Paging\RelayedBlankPageSource.cs" />
     <Compile Include="PrintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

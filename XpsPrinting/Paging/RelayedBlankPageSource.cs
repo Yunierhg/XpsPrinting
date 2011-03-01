@@ -2,21 +2,11 @@
 
 namespace XpsPrinting.Paging
 {
-    public static class RelayedBlankPageSource
+    public class RelayedBlankPageSource : IBlankPageSource
     {
-        public static RelayedBlankPageSource<T> Create<T>(Func<int, T> pageFactoryMethod)
-            where T: IBlankPage
-        {
-            return new RelayedBlankPageSource<T>(pageFactoryMethod);
-        }
-    }
+        private readonly Func<int, IBlankPage> _pageFactoryMethod;
 
-    public class RelayedBlankPageSource<T> : IBlankPageSource
-        where T : IBlankPage
-    {
-        private readonly Func<int, T> _pageFactoryMethod;
-
-        public RelayedBlankPageSource(Func<int, T> pageFactoryMethod)
+        public RelayedBlankPageSource(Func<int, IBlankPage> pageFactoryMethod)
         {
             if (pageFactoryMethod == null) throw new ArgumentNullException("pageFactoryMethod");
 

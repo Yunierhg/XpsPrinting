@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using XpsPrinting.Documents;
 using XpsPrinting.Formatting;
 using XpsPrinting.Formatting.Tables;
 using XpsPrinting.Paging;
@@ -42,15 +43,16 @@ namespace XpsPrinting
 
         private static DocumentPaginator GetPaginator(Size pageSize, DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
         {
-            Func<int, SimpleBlankPage> pageFactoryMethod = pageNum => new SimpleBlankPage
+            Func<int, IBlankPage> pageFactoryMethod = pageNum => new SimpleBlankPage
                                                                              {
                                                                                  PageSize = pageSize, 
                                                                                  PageNumber = String.Format("Page number: {0}", pageNum)
                                                                              };
-            var blankPageSource = RelayedBlankPageSource.Create(pageFactoryMethod);
+            var blankPageSource = new RelayedBlankPageSource(pageFactoryMethod);
             var docFormatter = new SimpleTitledTableDataFormatter(data, columnsInfo, title);
 
-            return new TemplatingPaginator(docFormatter, blankPageSource);
+            IDocument document = new SimpleDocument(blankPageSource, docFormatter);
+            return new XpsPrintingDocumentPaginator(document);
         }
 
         private static void ShowXpsPreview(XpsDocument xpsDocument)

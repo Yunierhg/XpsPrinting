@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Documents;
 using XpsPrinting.Documents;
+using XpsPrinting.Paging;
 
 namespace XpsPrinting
 {

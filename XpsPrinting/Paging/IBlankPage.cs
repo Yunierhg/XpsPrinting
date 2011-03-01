@@ -3,6 +3,15 @@ using System.Windows.Media;
 
 namespace XpsPrinting.Paging
 {
+    /// <summary>
+    /// Represents work piece of a page.
+    /// </summary>
+    /// <remarks>
+    /// Despite the fact of similarity to IPage interface the purpose of these interfaces are different. IPage represents ready-to-print
+    /// readonly page abstraction, while IBlankPage allows to adjust PageSize and get modified boxes and Visual for this PageSize.
+    /// 
+    /// So there's no 'IS A' relationship and no inheritance.
+    /// </remarks>
     public interface IBlankPage
     {
         /// <summary>
