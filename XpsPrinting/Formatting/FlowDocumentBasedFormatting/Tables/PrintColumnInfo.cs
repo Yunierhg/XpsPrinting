@@ -1,4 +1,4 @@
-﻿namespace XpsPrinting.Formatting.Tables
+﻿namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables
 {
     public class PrintColumnInfo
     {

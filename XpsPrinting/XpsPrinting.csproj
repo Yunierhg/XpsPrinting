@@ -66,16 +66,19 @@
     <Compile Include="Documents\IDocument.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\BlockFormattersFactory.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\BlockFormatter.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\SimpleFlowDocumentDataFormatter.cs" />
     <Compile Include="Paging\IPage.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Documents\SimpleDocument.cs" />
-    <Compile Include="Formatting\Utils\Extensions.cs" />
-    <Compile Include="Formatting\Utils\FontProperties.cs" />
-    <Compile Include="Formatting\Tables\TableFormatter.cs" />
-    <Compile Include="Formatting\Tables\PrintColumnInfo.cs" />
-    <Compile Include="Formatting\Tables\PrintLength.cs" />
-    <Compile Include="Formatting\Tables\PrintLengthToGridLengthConverter.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Utils\Extensions.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Utils\FontProperties.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Tables\TableFormatter.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Tables\PrintColumnInfo.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Tables\PrintLength.cs" />
+    <Compile Include="Formatting\FlowDocumentBasedFormatting\Tables\PrintLengthToGridLengthConverter.cs" />
     <Compile Include="Formatting\DocumentPaginatorDataFormatterBase.cs" />
     <Compile Include="InProcXpsDocumentWrapper.cs">
       <SubType>Code</SubType>
@@ -90,6 +93,9 @@
     <Compile Include="PrintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XpsPrintingDocumentPaginator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Formatting\FlowDocumentBasedFormatting\Text\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

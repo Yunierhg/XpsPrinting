@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace XpsPrinting.Formatting.Utils
+namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Utils
 {
     public static class Extensions
     {

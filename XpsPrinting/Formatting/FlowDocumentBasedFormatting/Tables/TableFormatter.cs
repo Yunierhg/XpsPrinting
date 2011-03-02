@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using XpsPrinting.Formatting.Utils;
+using XpsPrinting.Formatting.FlowDocumentBasedFormatting.Utils;
 
-namespace XpsPrinting.Formatting.Tables
+namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables
 {
     public class TableFormatter
     {

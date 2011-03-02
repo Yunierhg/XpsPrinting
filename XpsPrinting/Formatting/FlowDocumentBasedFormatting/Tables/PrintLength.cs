@@ -1,9 +1,10 @@
-﻿namespace XpsPrinting.Formatting.Tables
+﻿namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables
 {
     public struct PrintLength
     {
-        private readonly double _value;
         private static readonly PrintLength _auto;
+
+        private readonly double _value;
         private readonly PrintUnitType _unitType;
 
         static PrintLength()

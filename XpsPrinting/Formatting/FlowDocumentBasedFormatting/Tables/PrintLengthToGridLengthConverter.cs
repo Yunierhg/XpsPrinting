@@ -1,6 +1,6 @@
-﻿using System.Windows;
+using System.Windows;
 
-namespace XpsPrinting.Formatting.Tables
+namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables
 {
     internal static class PrintLengthToGridLengthConverter
     {

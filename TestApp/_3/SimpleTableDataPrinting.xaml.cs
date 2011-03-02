@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using XpsPrinting;
 using XpsPrinting.Documents;
-using XpsPrinting.Formatting.Tables;
+using XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables;
 using XpsPrinting.Paging;
 
 namespace TestApp._3

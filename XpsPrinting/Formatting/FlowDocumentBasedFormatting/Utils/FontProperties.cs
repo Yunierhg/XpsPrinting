@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace XpsPrinting.Formatting.Utils
+namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting.Utils
 {
     public class FontProperties
     {

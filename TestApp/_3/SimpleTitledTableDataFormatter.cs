@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Documents;
 using XpsPrinting.Formatting;
-using XpsPrinting.Formatting.Tables;
+using XpsPrinting.Formatting.FlowDocumentBasedFormatting.Tables;
 
 namespace TestApp._3
 {
