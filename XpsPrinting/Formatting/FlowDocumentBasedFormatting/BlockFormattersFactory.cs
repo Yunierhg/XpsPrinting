@@ -13,6 +13,16 @@ namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting
 
         public IBlockFormatter Header(string headerText)
         {
+            return HeaderImpl(headerText, false);
+        }
+
+        public IBlockFormatter HeaderFromNewPage(string headerText)
+        {
+            return HeaderImpl(headerText, true);
+        }
+
+        private static IBlockFormatter HeaderImpl(string headerText, bool fromNewPage)
+        {
             var run = new Run(headerText);
             run.FontSize = 18;
             run.FontWeight = FontWeights.Bold;
@@ -21,6 +31,7 @@ namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting
             paragraph.TextAlignment = TextAlignment.Center;
             paragraph.Margin = new Thickness(10);
             paragraph.KeepWithNext = true;
+            paragraph.BreakPageBefore = fromNewPage;
             return new RelayBlockFormatter(_ => paragraph);
         }
 
@@ -33,7 +44,9 @@ namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting
             foreach (var line in lines)
             {
                 var paragraph = new Paragraph(new Run(line));
-                paragraph.FontSize = 12;
+                paragraph.TextAlignment = TextAlignment.Justify;
+                paragraph.FontSize = 14;
+                paragraph.LineHeight = 20;
                 paragraph.TextIndent = 10;
                 section.Blocks.Add(paragraph);
             }

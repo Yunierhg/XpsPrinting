@@ -15,7 +15,7 @@ namespace TestApp._2
             get
             {
                 Measure(PageSize);
-                Arrange(new Rect(0, 0, Width, Height));
+                Arrange(ContentBox);
                 var transformToAncestor = contentPlaceholder.TransformToAncestor(this);
                 var topLeft = new Point(contentPlaceholder.Padding.Left, contentPlaceholder.Padding.Top);
                 var bottomRight = new Point(contentPlaceholder.ActualWidth - contentPlaceholder.Padding.Right, contentPlaceholder.ActualHeight - contentPlaceholder.Padding.Bottom);
@@ -23,9 +23,14 @@ namespace TestApp._2
             }
         }
 
-        public string PageNumber
+        public string Header
         {
-            set { pageNumber.Text = value; }
+            set { tbHeader.Text = value; }
+        }
+
+        public string Footer
+        {
+            set { tbFooter.Text = value; }
         }
     }
 }
