@@ -15,7 +15,9 @@ namespace XpsPrinting.Paging
         public BlankPageBase()
         {
             const double defaultMargin = 0.5; // inches
-            Margin = new Thickness(defaultMargin * 96);
+            Margin = new Thickness(defaultMargin*96);
+            Width = 8.5*96;
+            Height = 11*96;
         }
 
         public virtual Rect DataContentBox

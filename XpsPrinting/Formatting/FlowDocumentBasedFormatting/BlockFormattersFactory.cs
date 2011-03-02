@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows;
@@ -19,7 +20,25 @@ namespace XpsPrinting.Formatting.FlowDocumentBasedFormatting
             var paragraph = new Paragraph(run);
             paragraph.TextAlignment = TextAlignment.Center;
             paragraph.Margin = new Thickness(10);
+            paragraph.KeepWithNext = true;
             return new RelayBlockFormatter(_ => paragraph);
+        }
+
+        public IBlockFormatter Text(string text)
+        {
+            string[] lines = text.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+
+            var section = new Section();
+
+            foreach (var line in lines)
+            {
+                var paragraph = new Paragraph(new Run(line));
+                paragraph.FontSize = 12;
+                paragraph.TextIndent = 10;
+                section.Blocks.Add(paragraph);
+            }
+
+            return new RelayBlockFormatter(_ => section);
         }
 
         public IBlockFormatter Table(DataView data, IEnumerable<PrintColumnInfo> columnsInfo, string title)
